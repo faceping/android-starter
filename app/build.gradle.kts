@@ -4,7 +4,7 @@ plugins {
 
 // Your sandbox key: app.faceping.ai, Developers, Sandbox keys, Create sandbox key. Paste it here, replacing fp_test_…
 // This is the only place it's set. To try a key without putting it in a file, pass it to Gradle instead:
-//   ./gradlew installRelease -Pfaceping.sandboxKey=fp_test_...   (or set faceping.sandboxKey in ~/.gradle/gradle.properties)
+//   ./gradlew installDebug -Pfaceping.sandboxKey=fp_test_...   (or set faceping.sandboxKey in ~/.gradle/gradle.properties)
 val sandboxKey: String = providers.gradleProperty("faceping.sandboxKey").getOrElse("fp_test_…")
 
 android {

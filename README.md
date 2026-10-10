@@ -10,10 +10,10 @@ You need [Android Studio](https://developer.android.com/studio) (or JDK 17 or la
 
 1. **Get a free sandbox key** at [app.faceping.ai/signup](https://app.faceping.ai/signup) (no card, no approval). In the dashboard: **Developers → Sandbox keys → Create sandbox key**.
 2. **Paste it** into `app/build.gradle.kts`, replacing `fp_test_…`. (Or leave the file alone and pass it on the command line: `-Pfaceping.sandboxKey=fp_test_...`.)
-3. **Run a release build** on your phone (debug builds are much slower at face checks):
+3. **Run it** on your phone (press Run in Android Studio, or from a terminal). A debug build is fine: the FacePing core inside the SDK is already compiled for speed.
 
    ```bash
-   ./gradlew installRelease
+   ./gradlew installDebug
    ```
 
    Then open **FaceCheck** on the phone. In Android Studio, pick the `release` build variant and press Run.
