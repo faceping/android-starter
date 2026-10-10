@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FaceCheck</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="look_at_camera">Look at the camera</string>
+    <string name="tap_enrol">Tap Enrol my face to start.</string>
+    <string name="enrol_my_face">Enrol my face</string>
+    <string name="enrol_again">Enrol again</string>
+    <string name="verify">Verify</string>
+</resources>

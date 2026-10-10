@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ink">#0F172A</color>
+    <color name="slate">#475569</color>
+    <color name="green">#047857</color>
+    <color name="red">#B91C1C</color>
+    <color name="amber">#B45309</color>
+    <color name="pill">#EAECF0</color>
+    <color name="pill_offline">#FFF4E5</color>
+    <color name="brand">#2563EB</color>
+    <color name="camera_bg">#0B1220</color>
+</resources>
