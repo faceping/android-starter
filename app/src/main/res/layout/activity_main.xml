@@ -86,19 +86,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/tap_enrol"
+                android:text="@string/tap_enroll"
                 android:textColor="@color/slate"
                 android:textSize="14sp" />
         </LinearLayout>
     </FrameLayout>
 
     <Button
-        android:id="@+id/enrol"
+        android:id="@+id/enroll"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/button_outline"
         android:stateListAnimator="@null"
-        android:text="@string/enrol_my_face"
+        android:text="@string/enroll_my_face"
         android:textAllCaps="false"
         android:textColor="@color/ink"
         android:textSize="16sp"

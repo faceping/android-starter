@@ -29,7 +29,7 @@ Before you build your own app from this, change `applicationId` (and `namespace`
 | `app/build.gradle.kts` | Your sandbox key (the only place it's set), the FacePing dependency, the two ABIs FacePing runs on. |
 | `app/src/main/kotlin/com/example/facecheck/FaceCheckApp.kt` | Turns FacePing on with your sandbox key (`FacePing.init`). |
 | `app/src/main/res/layout/activity_main.xml` | The camera view (`ai.faceping.FaceCameraView`) and the two buttons. |
-| `app/src/main/kotlin/com/example/facecheck/MainActivity.kt` | `enrol` and `verifyLive`, and what each result means. |
+| `app/src/main/kotlin/com/example/facecheck/MainActivity.kt` | `enroll` and `verifyLive`, and what each result means. |
 | `gradle/libs.versions.toml` | Versions, including `faceping`. |
 
 ## The sandbox

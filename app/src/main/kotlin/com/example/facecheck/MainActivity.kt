@@ -1,6 +1,6 @@
 package com.example.facecheck
 
-import ai.faceping.EnrolOutcome
+import ai.faceping.EnrollOutcome
 import ai.faceping.FaceCameraView
 import ai.faceping.FaceGuideState
 import ai.faceping.FacePing
@@ -29,7 +29,7 @@ import java.util.Locale
 /** The same screen as the MAUI FaceCheck sample: enrol your face, then verify it with a live check, with or without a network. */
 class MainActivity : ComponentActivity() {
     private lateinit var camera: FaceCameraView
-    private lateinit var enrolButton: Button
+    private lateinit var enrollButton: Button
     private lateinit var verifyButton: Button
     private lateinit var resultTitle: TextView
     private lateinit var resultNote: TextView
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
         }
 
         camera = findViewById(R.id.camera)
-        enrolButton = findViewById(R.id.enrol)
+        enrollButton = findViewById(R.id.enroll)
         verifyButton = findViewById(R.id.verify)
         resultTitle = findViewById(R.id.resultTitle)
         resultNote = findViewById(R.id.resultNote)
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
         }
 
         camera.cameraFailedListener = FaceCameraView.CameraFailedListener { message -> show("Camera unavailable", message, R.color.ink) }
-        enrolButton.setOnClickListener { onEnrol() }
+        enrollButton.setOnClickListener { onEnroll() }
         verifyButton.setOnClickListener { onVerify() }
 
         connectivity = getSystemService(ConnectivityManager::class.java)
@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
             FacePing.current
         } catch (e: IllegalStateException) {
             show("Sandbox key problem", "Set your sandbox key in app/build.gradle.kts (it starts with fp_test_).", R.color.red)
-            enable(enrolButton, false)
+            enable(enrollButton, false)
             null
         }
 
@@ -115,14 +115,14 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    private fun onEnrol() = runAction {
+    private fun onEnroll() = runAction {
         val fp = faceping ?: return@runAction
         show("Hold still", "Taking the photo…", R.color.ink)
         camera.guideState = FaceGuideState.WORKING
         val photo = camera.capture()
-        val result = fp.enrol("me", photo)
+        val result = fp.enroll("me", photo)
         camera.guideState = FaceGuideState.READY
-        if (result.outcome == EnrolOutcome.ENROLLED) {
+        if (result.outcome == EnrollOutcome.ENROLLED) {
             setEnrolled(true)
             show("Enrolled", if (offline) "No network. Tap Verify." else "Now tap Verify.", R.color.ink)
         } else {
@@ -145,7 +145,7 @@ class MainActivity : ComponentActivity() {
     private fun runAction(action: suspend () -> Unit) {
         if (busy) return
         busy = true
-        enable(enrolButton, false)
+        enable(enrollButton, false)
         enable(verifyButton, false)
         lifecycleScope.launch {
             try {
@@ -164,7 +164,7 @@ class MainActivity : ComponentActivity() {
                 show("Try again", e.message, R.color.red)
             } finally {
                 busy = false
-                enable(enrolButton, true)
+                enable(enrollButton, true)
                 enable(verifyButton, faceping?.enrolledIds?.contains("me") == true)
             }
         }
@@ -178,12 +178,12 @@ class MainActivity : ComponentActivity() {
 
     private fun setEnrolled(enrolled: Boolean) {
         enable(verifyButton, enrolled)
-        enrolButton.setText(if (enrolled) R.string.enrol_again else R.string.enrol_my_face)
+        enrollButton.setText(if (enrolled) R.string.enroll_again else R.string.enroll_my_face)
     }
 
-    private fun show(title: String, note: String?, colour: Int) {
+    private fun show(title: String, note: String?, color: Int) {
         resultTitle.text = title
-        resultTitle.setTextColor(ContextCompat.getColor(this, colour))
+        resultTitle.setTextColor(ContextCompat.getColor(this, color))
         resultNote.text = note ?: ""
     }
 
@@ -210,12 +210,12 @@ class MainActivity : ComponentActivity() {
         VerifyOutcome.MATCH -> "Match"
     }
 
-    private fun describe(outcome: EnrolOutcome) = when (outcome) {
-        EnrolOutcome.NO_FACE -> "No face seen. Look at the camera."
-        EnrolOutcome.MULTIPLE_FACES -> "More than one face. Just you, please."
-        EnrolOutcome.FACE_TOO_SMALL -> "Move a little closer."
-        EnrolOutcome.NOT_LIVE -> "That looked like a photo or a screen."
-        EnrolOutcome.LIMIT_REACHED -> "The sandbox is full on this phone."
-        EnrolOutcome.ENROLLED -> "Enrolled."
+    private fun describe(outcome: EnrollOutcome) = when (outcome) {
+        EnrollOutcome.NO_FACE -> "No face seen. Look at the camera."
+        EnrollOutcome.MULTIPLE_FACES -> "More than one face. Just you, please."
+        EnrollOutcome.FACE_TOO_SMALL -> "Move a little closer."
+        EnrollOutcome.NOT_LIVE -> "That looked like a photo or a screen."
+        EnrollOutcome.LIMIT_REACHED -> "The sandbox is full on this phone."
+        EnrollOutcome.ENROLLED -> "Enrolled."
     }
 }
