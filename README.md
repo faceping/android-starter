@@ -16,6 +16,8 @@ You need [Android Studio](https://developer.android.com/studio) (or JDK 17 or la
    ./gradlew installRelease
    ```
 
+   (From a terminal on a fresh clone, Gradle needs to know where the Android SDK is: open the project in Android Studio once, or set `ANDROID_HOME`, for example `export ANDROID_HOME=~/Library/Android/sdk` on a Mac. It also needs JDK 17 or later; Android Studio's bundled one works: `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`.)
+
    Then open **FaceCheck** on the phone.
 
 4. Tap **Enrol my face**, then **Verify**: you should see **Match**. Now switch on airplane mode and tap **Verify** again.
