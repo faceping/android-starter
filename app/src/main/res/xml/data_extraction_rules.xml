@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12 and later. FacePing's face store (files/faceping/) is encrypted with a key held in this device's Keystore,
+     wrapped in faceping.keys.xml: neither can be used on another device, so neither goes into a cloud backup or a
+     transfer to a new phone. On the new phone the app starts fresh (a check-in device syncs its list again). -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="faceping/" />
+        <exclude domain="sharedpref" path="faceping.keys.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="faceping/" />
+        <exclude domain="sharedpref" path="faceping.keys.xml" />
+    </device-transfer>
+</data-extraction-rules>
