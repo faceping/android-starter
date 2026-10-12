@@ -4,13 +4,15 @@ plugins {
 
 // Your sandbox key: app.faceping.ai, Developers, Sandbox keys, Create sandbox key. Paste it here, replacing fp_test_…
 // This is the only place it's set. To try a key without putting it in a file, pass it to Gradle instead:
-//   ./gradlew installDebug -Pfaceping.sandboxKey=fp_test_...   (or set faceping.sandboxKey in ~/.gradle/gradle.properties)
+//   ./gradlew installRelease -Pfaceping.sandboxKey=fp_test_...   (or set faceping.sandboxKey in ~/.gradle/gradle.properties)
 val sandboxKey: String = providers.gradleProperty("faceping.sandboxKey").getOrElse("fp_test_…")
 
 // Check-in device mode: a device token (fpd_…, from your practice list's Devices tab or POST /v1/lists/{listId}/devices)
 // and the person to verify (their personId). With a device token, the app downloads that list's people instead of
 // enrolling on the phone, and the sandbox key is ignored. Set them here or pass them to Gradle:
 //   ./gradlew installRelease -Pfaceping.deviceToken=fpd_... -Pfaceping.personId=ACME-000123
+// A device-mode build gets its own application ID (".device" on the end) and name ("FaceCheck Device"), so it installs
+// next to the sandbox app instead of replacing it.
 val deviceToken: String = providers.gradleProperty("faceping.deviceToken").getOrElse("")
 val personId: String = providers.gradleProperty("faceping.personId").getOrElse("me")
 
@@ -28,6 +30,8 @@ android {
         buildConfigField("String", "SANDBOX_KEY", "\"$sandboxKey\"")
         buildConfigField("String", "DEVICE_TOKEN", "\"$deviceToken\"")
         buildConfigField("String", "PERSON_ID", "\"$personId\"")
+        if (deviceToken.isNotEmpty()) applicationIdSuffix = ".device"
+        manifestPlaceholders["appLabel"] = if (deviceToken.isNotEmpty()) "FaceCheck Device" else "FaceCheck"
         // FacePing's native core is built for these two ABIs (phones and emulators).
         ndk {
             abiFilters += listOf("arm64-v8a", "x86_64")

@@ -6,11 +6,11 @@ It's a fuller version of the app you build in the [Android guide](https://docs.f
 
 ## Run it
 
-You need [Android Studio](https://developer.android.com/studio) (or JDK 17 or later and the Android SDK), and an Android phone (Android 7 or later, 64-bit) with USB debugging on and a cable. Use a phone: an emulator only has a front camera if you map your computer's webcam to it, which is slower and less reliable for the liveness check.
+You need [Android Studio](https://developer.android.com/studio) 2025.3 or later (the project uses Android Gradle Plugin 9.1 and Gradle 9.3), or JDK 17 or later and the Android SDK, and an Android phone (Android 7 or later, 64-bit) with USB debugging on and a cable. Use a phone: an emulator only has a front camera if you map your computer's webcam to it, which is slower and less reliable for the liveness check.
 
 1. **Get a free sandbox key** at [app.faceping.ai/signup](https://app.faceping.ai/signup) (no card, no approval). In the dashboard: **Developers → Sandbox keys → Create sandbox key**.
 2. **Paste it** into `app/build.gradle.kts`, replacing `fp_test_…`. (Or leave the file alone and pass it on the command line: `-Pfaceping.sandboxKey=fp_test_...`.)
-3. **Run it** on your phone. Use the `release` build variant, as the guide does, for real timings (the starter signs release builds with the debug key, so they install straight away). In Android Studio, pick the `release` build variant and press Run; or from a terminal:
+3. **Run it** on your phone. Use the `release` build variant: debug builds are several times slower at face checks. The starter signs release builds with the debug key, so they install straight away. In Android Studio, pick the `release` build variant and press Run; or from a terminal:
 
    ```bash
    ./gradlew installRelease
@@ -35,7 +35,7 @@ Once you've tried the server side with your sandbox key (a practice check-in lis
    ./gradlew installRelease -Pfaceping.deviceToken=fpd_yourtoken -Pfaceping.personId=ACME-000123
    ```
 
-   With a device token set, the sandbox key is ignored. To keep the sandbox app on the phone as well, also change `applicationId` (for example to `com.yourcompany.facecheck.device`).
+   With a device token set, the sandbox key is ignored, and the build gets its own application ID (`com.yourcompany.facecheck.device`) and name (**FaceCheck Device**), so it installs next to the sandbox app instead of replacing it.
 3. Open it. The app downloads the list, hides **Enrol my face** (a check-in device gets its people from the server) and opens **Verify** once that person is on the phone. After each sync it says what it found: how many people, or that the token isn't valid, the list has finished, or it couldn't connect.
 
 See [Devices and offline sync](https://docs.faceping.ai/devices/).
