@@ -40,6 +40,8 @@ Once you've tried the server side with your sandbox key (a practice check-in lis
 
 See [Devices and offline sync](https://docs.faceping.ai/devices/).
 
+If your server needs proof that a check really happened, see [Signed check results](https://docs.faceping.ai/signed-results/).
+
 ## What's where
 
 | File | What it does |
